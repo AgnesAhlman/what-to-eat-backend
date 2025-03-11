@@ -8,7 +8,7 @@ using WhatToEat.Data;
 
 #nullable disable
 
-namespace backend.Migrations
+namespace WhatToEat.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot

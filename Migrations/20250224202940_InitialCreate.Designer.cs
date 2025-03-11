@@ -9,7 +9,7 @@ using WhatToEat.Data;
 
 #nullable disable
 
-namespace backend.Migrations
+namespace WhatToEat.Migrations
 {
     [DbContext(typeof(DataContext))]
     [Migration("20250224202940_InitialCreate")]
