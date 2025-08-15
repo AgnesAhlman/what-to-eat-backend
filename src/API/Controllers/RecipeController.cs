@@ -1,3 +1,4 @@
+using System;
 using API.DTOs;
 using API.Mappers;
 using Domain.Entities;
@@ -16,7 +17,9 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RecipeDto>>> GetRecipes()
         {
-            var recipes = await _dbContext.Recipes.Include(r => r.Categories).ToListAsync();
+            var recipes = await _dbContext
+                .Recipes.Include(recipe => recipe.Categories)
+                .ToListAsync();
             return Ok(recipes.ToDtos());
         }
 
@@ -24,8 +27,8 @@ namespace API.Controllers
         public async Task<ActionResult<RecipeDto>> GetRecipe(int id)
         {
             var recipe = await _dbContext
-                .Recipes.Include(r => r.Categories)
-                .FirstOrDefaultAsync(r => r.Id == id);
+                .Recipes.Include(recipe => recipe.Categories)
+                .FirstOrDefaultAsync(recipe => recipe.Id == id);
 
             if (recipe == null)
             {
@@ -45,8 +48,8 @@ namespace API.Controllers
             {
                 foreach (var categoryName in recipeDto.Categories)
                 {
-                    var category = await _dbContext.Categories.FirstOrDefaultAsync(c =>
-                        c.Name == categoryName
+                    var category = await _dbContext.Categories.FirstOrDefaultAsync(category =>
+                        category.Name == categoryName
                     );
 
                     if (category == null)
