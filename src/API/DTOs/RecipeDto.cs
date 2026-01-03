@@ -6,5 +6,6 @@ namespace API.DTOs
         public required string Title { get; set; }
         public string? Description { get; set; }
         public List<string>? Categories { get; set; }
+        public List<string>? Ingredients { get; set; }
     }
 };

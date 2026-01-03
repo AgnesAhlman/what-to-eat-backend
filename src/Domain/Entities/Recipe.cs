@@ -6,6 +6,7 @@ namespace Domain.Entities
         public required string Title { get; set; }
         public string? Description { get; set; }
         public ICollection<Category> Categories { get; set; } = [];
+        public List<string> Ingredients { get; set; } = [];
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }
