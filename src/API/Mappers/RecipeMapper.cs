@@ -15,6 +15,7 @@ namespace API.Mappers
                 Title = recipe.Title,
                 Description = recipe.Description,
                 Categories = recipe.Categories?.Select(c => c.Name).ToList(),
+                Ingredients = recipe.Ingredients.ToList() ?? [],
             };
         }
 
@@ -30,6 +31,7 @@ namespace API.Mappers
                 Id = recipeDto.Id,
                 Title = recipeDto.Title,
                 Description = recipeDto.Description,
+                Ingredients = recipeDto.Ingredients?.ToList() ?? [],
             };
         }
     }
