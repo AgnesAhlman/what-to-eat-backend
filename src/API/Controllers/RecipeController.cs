@@ -19,6 +19,7 @@ namespace API.Controllers
         {
             var recipes = await _dbContext
                 .Recipes.Include(recipe => recipe.Categories)
+                .Include(recipe => recipe.Ingredients)
                 .ToListAsync();
             return Ok(recipes.ToDtos());
         }
@@ -28,6 +29,7 @@ namespace API.Controllers
         {
             var recipe = await _dbContext
                 .Recipes.Include(recipe => recipe.Categories)
+                .Include(recipe => recipe.Ingredients)
                 .FirstOrDefaultAsync(recipe => recipe.Id == id);
 
             if (recipe == null)
@@ -68,6 +70,7 @@ namespace API.Controllers
             // Reload the recipe with categories to ensure we have all the data
             var createdRecipe = await _dbContext
                 .Recipes.Include(r => r.Categories)
+                .Include(r => r.Ingredients)
                 .FirstOrDefaultAsync(r => r.Id == recipe.Id);
 
             return CreatedAtAction(

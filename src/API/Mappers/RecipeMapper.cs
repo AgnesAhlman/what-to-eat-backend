@@ -15,6 +15,14 @@ namespace API.Mappers
                 Title = recipe.Title,
                 Description = recipe.Description,
                 Categories = recipe.Categories?.Select(c => c.Name).ToList(),
+                Ingredients = recipe
+                    .Ingredients?.Select(i => new IngredientDto
+                    {
+                        Text = i.Text,
+                        Unit = i.Unit,
+                        Amount = i.Amount,
+                    })
+                    .ToList(),
             };
         }
 
@@ -25,12 +33,27 @@ namespace API.Mappers
 
         public static Recipe ToEntity(this RecipeDto recipeDto)
         {
-            return new Recipe
+            var recipe = new Recipe
             {
                 Id = recipeDto.Id,
                 Title = recipeDto.Title,
                 Description = recipeDto.Description,
             };
+
+            if (recipeDto.Ingredients != null)
+            {
+                foreach (var i in recipeDto.Ingredients)
+                {
+                    recipe.Ingredients.Add(new Ingredient
+                    {
+                        Text = i.Text,
+                        Unit = i.Unit,
+                        Amount = i.Amount,
+                    });
+                }
+            }
+
+            return recipe;
         }
     }
 }
